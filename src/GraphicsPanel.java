@@ -13,10 +13,12 @@ public class GraphicsPanel extends JPanel implements ActionListener {
     private int importantInt;
     private int selectionSortI;
     private int colorIdx;
+    private JFrame enclosingFrame;
 
-    public GraphicsPanel(String name, int x, int y) {
+    public GraphicsPanel(JFrame frame, int x, int y) {
         importantInt = y;
         colorIdx = 0;
+        enclosingFrame = frame;
         if (importantInt == 1) {
             timer = new Timer(1, this);
             selectionSortI = 0;
@@ -55,10 +57,10 @@ public class GraphicsPanel extends JPanel implements ActionListener {
         super.paintComponent(g);  // just do this
         setBackground(Color.black);
         if (importantInt == 1) {
+            paintSmall(g);
             g.setFont(new Font("Arial", Font.BOLD, 15));
             g.setColor(Color.WHITE);
             g.drawString("Comparisons: " + comparisons, 70, 50);
-            paintSmall(g);
         } else if (importantInt == 2) {
             g.setFont(new Font("Arial", Font.BOLD, 15));
             g.setColor(Color.WHITE);
@@ -94,6 +96,14 @@ public class GraphicsPanel extends JPanel implements ActionListener {
         }
         return a.get(n - 1).getHeight() >= a.get(n - 2).getHeight() && arraySortedOrNot(a, n - 1);
     }
+    boolean isSorted(ArrayList<Rectangle> a){
+        for (int i = 0; i < a.size() - 1; i++){
+            if (a.get(i).getHeight() > a.get(i + 1).getHeight()){
+                return false;
+            }
+        }
+        return true;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -127,9 +137,6 @@ public class GraphicsPanel extends JPanel implements ActionListener {
                 rectArray.set(selectionSortI, min);
             }
             selectionSortI++;
-            if (selectionSortI >= rectArray.size() - 1) {
-                selectionSortI = 0;
-            }
         }
     }
     private void paintSmall(Graphics g) {

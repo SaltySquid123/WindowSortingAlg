@@ -40,15 +40,15 @@ public class WelcomePanel extends JPanel implements ActionListener{
         if (e.getSource() instanceof JButton) {
             JButton button = (JButton) e.getSource();
             if (button == sort1){
-                MainFrame f = new MainFrame("Sorting", 79, 1);
+                MainFrame f = new MainFrame(79, 1);
                 enclosingFrame.setVisible(false);
             }
             else if (button == sort2){
-                MainFrame f = new MainFrame("Sorting", 79, 2);
+                MainFrame f = new MainFrame(79, 2);
                 enclosingFrame.setVisible(false);
             }
             else {
-                MainFrame f = new MainFrame("Sorting", 6, 4);
+                MainFrame f = new MainFrame(6, 4);
                 enclosingFrame.setVisible(false);
             }
         }
